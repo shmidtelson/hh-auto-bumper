@@ -11,7 +11,7 @@ config = Config()
 
 logHandler = handlers.TimedRotatingFileHandler(config.getAppPath() + '/var/log/app.log', when='M', interval=1,
                                                backupCount=2)
-logHandler.setLevel(logging.INFO)
+logHandler.setLevel(logging.DEBUG)
 ## Here we set our logHandler's formatter
 logHandler.setFormatter(formatter)
 
