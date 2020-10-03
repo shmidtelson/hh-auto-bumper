@@ -14,7 +14,11 @@ class ResumeUpdateBlackListHandler(AbstractHandler):
     def handle(self, resume: ResumeEntity) -> str:
         if resume.getAccessType() == ResumeEntity.ACCESS_TYPE_BLACKLIST:
             blackListSet = self.resumeBlackListStorageService.get()
-            self.resumeBlackListService.setBlackListCompaniesByResumeId(resume.getId(), blackListSet)
+            data = self.resumeBlackListService.getBlackListIdsByResumeId(resume.getId())
+
+            # Add if exists new elements
+            if blackListSet.symmetric_difference(data):
+                self.resumeBlackListService.setBlackListCompaniesByResumeId(resume.getId(), blackListSet)
 
         # Blacklist
         return super().handle(resume)
