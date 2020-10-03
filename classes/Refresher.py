@@ -4,6 +4,7 @@ from classes.services.ResumeService import ResumeService
 from classes.services.refresher.ResumeBumpHandler import ResumeBumpHandler
 from classes.services.refresher.ResumeCollectBlackListHandler import ResumeCollectBlackListHandler
 from classes.services.refresher.ResumeUpdateBlackListHandler import ResumeUpdateBlackListHandler
+from classes.utils.logger import logger
 
 
 class Refresher:
@@ -18,6 +19,7 @@ class Refresher:
 
     def execute(self):
         if self.accessToken.isTokenExpired():
+            logger.info('Access token expired. Try to get new')
             self.accessToken.handleRefreshToken(self.config.getAccessToken().getRefreshToken())
 
         resumes = self.resumeService.getResumes()

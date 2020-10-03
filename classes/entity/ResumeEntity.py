@@ -16,7 +16,7 @@ class ResumeEntity:
         entity.setId(response.get('id'))
         entity.setUpdated(response.get('updated'))
         entity.setStatus(response.get('status').get('id'))
-        entity.setStatus(response.get('access').get('type').get('id'))
+        entity.setAccessType(response.get('access').get('type').get('id'))
 
         return entity
 
