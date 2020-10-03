@@ -4,6 +4,7 @@ from classes.Config import Config
 from classes.utils.DateHelper import DateHelper
 from classes.utils.logger import logger
 
+
 class AccessToken:
     TIME_END = 172800
     config = None

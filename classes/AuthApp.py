@@ -4,21 +4,22 @@ from typing import Union
 from classes.utils.logger import logger
 from classes.Config import Config
 
+
 class AuthApp:
     config = None
 
     def __init__(self):
         self.config = Config()
 
-    def handle(self) -> Union[bool,str]:
+    def handle(self) -> Union[bool, str]:
         try:
             response = requests.post(self.config.getOauthTokenEndpoint(),
-                {
-                    'grant_type': 'client_credentials',
-                    'client_id': self.config.getAppId(),
-                    'client_secret': self.config.getAppSecret(),
-                }
-            )
+                                     {
+                                         'grant_type': 'client_credentials',
+                                         'client_id': self.config.getAppId(),
+                                         'client_secret': self.config.getAppSecret(),
+                                     }
+                                     )
         except Exception as e:
             logger.error(e)
             return False

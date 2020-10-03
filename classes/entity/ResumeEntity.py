@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+
 class ResumeEntity:
     STATUS_PUBLISHED = 'published'
     ACCESS_TYPE_BLACKLIST = 'blacklist'
@@ -42,4 +43,3 @@ class ResumeEntity:
 
     def setAccessType(self, updated) -> None:
         self.__access_type = updated
-

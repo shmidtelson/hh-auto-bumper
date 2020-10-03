@@ -9,7 +9,8 @@ logger.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 config = Config()
 
-logHandler = handlers.TimedRotatingFileHandler(config.getAppPath() + '/var/log/app.log', when='M', interval=1, backupCount=2)
+logHandler = handlers.TimedRotatingFileHandler(config.getAppPath() + '/var/log/app.log', when='M', interval=1,
+                                               backupCount=2)
 logHandler.setLevel(logging.INFO)
 ## Here we set our logHandler's formatter
 logHandler.setFormatter(formatter)

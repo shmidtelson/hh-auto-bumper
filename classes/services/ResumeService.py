@@ -1,6 +1,7 @@
 from classes.entity.ResumeEntity import ResumeEntity
 from classes.repository.HeadHunterRepository import HeadHunterRepository
 
+
 class ResumeService:
     repository = None
 

@@ -3,6 +3,7 @@ from classes.services.refresher.Handler import Handler
 from typing import Any, Union
 from abc import abstractmethod
 
+
 class AbstractHandler(Handler):
     """
     The default chaining behavior can be implemented inside a base handler
@@ -19,7 +20,7 @@ class AbstractHandler(Handler):
         return handler
 
     @abstractmethod
-    def handle(self, request: Any) -> Union[str,None]:
+    def handle(self, request: Any) -> Union[str, None]:
         if self._next_handler:
             return self._next_handler.handle(request)
 

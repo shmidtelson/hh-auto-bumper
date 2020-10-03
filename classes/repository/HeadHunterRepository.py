@@ -3,6 +3,7 @@ import json
 from classes.Config import Config
 from classes.utils.logger import logger
 
+
 class HeadHunterRepository:
     config = None
 
@@ -26,7 +27,8 @@ class HeadHunterRepository:
 
     def getBlackListCompaniesByResumeId(self, resumeId):
         try:
-            response = requests.get(self.config.getResumeBlackListEndpoint(resumeId), headers=self.config.getAuthHeader())
+            response = requests.get(self.config.getResumeBlackListEndpoint(resumeId),
+                                    headers=self.config.getAuthHeader())
         except Exception as e:
             logger.error(e)
             return []
@@ -41,8 +43,8 @@ class HeadHunterRepository:
 
     def setBlackListCompaniesByResumeId(self, resumeId, data: dict) -> bool:
         try:
-            t = self.config.getResumeBlackListEndpoint(resumeId)
-            result = requests.post(self.config.getResumeBlackListEndpoint(resumeId), json=data, headers=self.config.getAuthHeader())
+            requests.post(self.config.getResumeBlackListEndpoint(resumeId), json=data,
+                          headers=self.config.getAuthHeader())
         except Exception as e:
             logger.error(e)
             return False

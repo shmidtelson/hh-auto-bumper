@@ -1,5 +1,6 @@
 from classes.utils.DateHelper import DateHelper
 
+
 class AccessTokenEntity:
     __access_token: str = ''
     __refresh_token: str = ''
