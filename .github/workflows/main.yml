@@ -1,0 +1,20 @@
+name: Continuous Delivery
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@master
+      with:
+        username: ${{ secrets.VPS_USERNAME }}
+        host: ${{ secrets.VPS_HOST }}
+        key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
+        script: |
+          cd ${{ secrets.VPS_PROJECT_PATH }}
+          git fetch --all
+          git reset --hard HEAD
