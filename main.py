@@ -3,5 +3,6 @@ from classes.Refresher import Refresher
 
 load_dotenv(find_dotenv())
 
-client = Refresher()
-client.execute()
+if __name__ == "__main__":
+    client = Refresher()
+    client.execute()
