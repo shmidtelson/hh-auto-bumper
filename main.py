@@ -4,4 +4,4 @@ from classes.Refresher import Refresher
 load_dotenv(find_dotenv())
 
 client = Refresher()
-client.handle()
+client.execute()

@@ -23,3 +23,28 @@ class HeadHunterRepository:
             return []
 
         return responseDict['items']
+
+    def getBlackListCompaniesByResumeId(self, resumeId):
+        try:
+            response = requests.get(self.config.getResumeBlackListEndpoint(resumeId), headers=self.config.getAuthHeader())
+        except Exception as e:
+            logger.error(e)
+            return []
+
+        responseDict = json.loads(response.text)
+
+        if 'items' not in responseDict:
+            logger.error(responseDict)
+            return []
+
+        return responseDict['items']
+
+    def setBlackListCompaniesByResumeId(self, resumeId, data: dict) -> bool:
+        try:
+            t = self.config.getResumeBlackListEndpoint(resumeId)
+            result = requests.post(self.config.getResumeBlackListEndpoint(resumeId), json=data, headers=self.config.getAuthHeader())
+        except Exception as e:
+            logger.error(e)
+            return False
+
+        return True

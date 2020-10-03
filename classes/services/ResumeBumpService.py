@@ -3,7 +3,8 @@ import requests
 from classes.Config import Config
 from classes.utils.DateHelper import DateHelper
 from classes.utils.logger import logger
-class ResumeService:
+
+class ResumeBumpService:
 
     RANGE_BUMP = 14400
     config = None

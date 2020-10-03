@@ -1,38 +1,38 @@
-import time
-from classes.AccessToken import AccessToken
 from classes.Config import Config
-from classes.AuthApp import AuthApp
-from classes.ResumeService import ResumeService
-from classes.repository.HeadHunterRepository import HeadHunterRepository
+from classes.AccessToken import AccessToken
+from classes.services.ResumeService import ResumeService
+from classes.services.refresher.ResumeBumpHandler import ResumeBumpHandler
+from classes.services.refresher.ResumeCollectBlackListHandler import ResumeCollectBlackListHandler
+from classes.services.refresher.ResumeUpdateBlackListHandler import ResumeUpdateBlackListHandler
 
 
 class Refresher:
     config = None
-    authApp = None
-    repository = None
+    accessToken = None
     resumeService = None
 
     def __init__(self):
         self.config = Config()
-        self.authApp = AuthApp()
         self.accessToken = AccessToken()
-        self.repository = HeadHunterRepository()
         self.resumeService = ResumeService()
 
-    def handle(self):
-        tokenEntity = self.config.getAccessToken()
-
+    def execute(self):
         if self.accessToken.isTokenExpired():
-            self.accessToken.handleRefreshToken(tokenEntity.getRefreshToken())
-            tokenEntity = self.config.getAccessToken()
+            self.accessToken.handleRefreshToken(self.config.getAccessToken().getRefreshToken())
 
-        resumes = self.repository.getResumes()
+        resumes = self.resumeService.getResumes()
 
+        # Resumes Bump and collect Data
         for resume in resumes:
-            if resume.get('status').get('id') == 'published':
-                resumeId = resume.get('id')
-                date = resume.get('updated')
+            resumeBumpHandler = ResumeBumpHandler()
+            resumeCollectBlackListHandler = ResumeCollectBlackListHandler()
+            # Setup our Chain
+            resumeBumpHandler.set_next(resumeCollectBlackListHandler)
+            # Run Chain
+            resumeBumpHandler.handle(resume)
 
-                if self.resumeService.isReadyToBump(date):
-                    self.resumeService.bump(resumeId)
-                    time.sleep(1)
+        # Update resumes
+        for resume in resumes:
+            resumeUpdateBlackListHandler = ResumeUpdateBlackListHandler()
+            # Setup our Chain
+            resumeUpdateBlackListHandler.handle(resume)

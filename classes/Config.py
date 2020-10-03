@@ -1,6 +1,5 @@
 import os
 import pickle
-import datetime
 from os.path import dirname
 
 from classes.entity.AccessTokenEntity import AccessTokenEntity
@@ -20,6 +19,9 @@ class Config:
 
     def getMyResumesEndpoint(self) -> str:
         return self.getApiUrl() + 'resumes/mine'
+
+    def getResumeBlackListEndpoint(self, resumeId: str) -> str:
+        return self.getApiUrl() + f'resumes/{resumeId}/blacklist'
 
     def getAppId(self) -> str:
         return os.getenv('APP_ID')
