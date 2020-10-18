@@ -1,6 +1,7 @@
 import requests
 import json
 from typing import Union
+from classes.entity.AccessTokenEntity import AccessTokenEntity
 from classes.utils.logger import logger
 from classes.Config import Config
 
@@ -31,6 +32,6 @@ class AuthApp:
             return False
 
         if 'access_token' in responseDict:
-            self.config.setAccessToken(responseDict.get('access_token'))
+            self.config.setAccessToken(AccessTokenEntity(responseDict))
 
         return True

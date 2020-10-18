@@ -1,10 +1,8 @@
 import json
 import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from urllib.parse import urlparse
 from urllib import parse
 import requests
-import pickle
 
 from dotenv import load_dotenv, find_dotenv
 
@@ -31,8 +29,7 @@ class GetHandler(BaseHTTPRequestHandler):
 
             if 'access_token' in result:
                 c = Config()
-                e = AccessTokenEntity(result)
-                c.setAccessToken(e)
+                c.setAccessToken(AccessTokenEntity(result))
 
             exit()
 
