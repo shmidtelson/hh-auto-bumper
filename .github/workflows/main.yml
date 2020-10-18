@@ -17,4 +17,4 @@ jobs:
         script: |
           cd ${{ secrets.VPS_PROJECT_PATH }}
           git fetch --all
-          git reset --hard HEAD
+          git reset --hard origin/master
