@@ -35,11 +35,11 @@ class ResumeEntity:
     def getStatus(self) -> str:
         return self.__status
 
-    def setStatus(self, updated) -> None:
-        self.__status = updated
+    def setStatus(self, status) -> None:
+        self.__status = status
 
     def getAccessType(self) -> str:
         return self.__access_type
 
-    def setAccessType(self, updated) -> None:
-        self.__access_type = updated
+    def setAccessType(self, access_type) -> None:
+        self.__access_type = access_type
