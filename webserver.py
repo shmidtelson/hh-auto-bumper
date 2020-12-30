@@ -39,7 +39,7 @@ class GetHandler(BaseHTTPRequestHandler):
                 'client_id': os.getenv('APP_ID'),
                 'client_secret': os.getenv('APP_SECRET'),
                 'code': code,
-                'redirect_uri': 'http://localhost:8080'
+                'redirect_uri': redirect_uri
             })
 
             result = json.loads(response.text)
