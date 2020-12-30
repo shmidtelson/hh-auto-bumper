@@ -5,7 +5,8 @@ from classes.Refresher import Refresher
 load_dotenv(find_dotenv())
 
 if __name__ == "__main__":
-    print("Will start server")
-    client = Refresher()
-    client.execute()
-    time.sleep(60*5)
+    while True:
+        print("Will start server")
+        client = Refresher()
+        client.execute()
+        time.sleep(60*5)
