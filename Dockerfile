@@ -7,6 +7,5 @@ WORKDIR ${APP_PATH}
 
 RUN pip install pipenv
 RUN pipenv install --deploy --system --ignore-pipfile
-RUN python webserver.py &
 EXPOSE 8085
 CMD ["python", "main.py"]
