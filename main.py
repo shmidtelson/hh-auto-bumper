@@ -1,3 +1,4 @@
+import time
 from dotenv import load_dotenv, find_dotenv
 from classes.Refresher import Refresher
 
@@ -7,3 +8,4 @@ if __name__ == "__main__":
     print("Will start server")
     client = Refresher()
     client.execute()
+    time.sleep(60*5)

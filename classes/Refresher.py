@@ -1,3 +1,4 @@
+import time
 from classes.Config import Config
 from classes.AccessToken import AccessToken
 from classes.services.ResumeService import ResumeService
@@ -18,7 +19,15 @@ class Refresher:
         self.resumeService = ResumeService()
 
     def execute(self):
-        if self.accessToken.isTokenExpired():
+        while True:
+            try:
+                expired = self.accessToken.isTokenExpired()
+                break
+            except:
+                print('Access token not found')
+            time.sleep(10)
+
+        if expired:
             logger.info('Access token expired. Try to get new')
             self.accessToken.handleRefreshToken(self.config.getAccessToken().getRefreshToken())
 
