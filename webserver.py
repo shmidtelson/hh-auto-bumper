@@ -44,12 +44,10 @@ class GetHandler(BaseHTTPRequestHandler):
 
             result = json.loads(response.text)
 
-            print(result)
-
             if 'access_token' in result:
                 c = Config()
                 c.setAccessToken(AccessTokenEntity(result))
-
+                print(c.getAccessToken().getAccessToken())
             exit()
 
         self.send_response(200)

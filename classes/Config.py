@@ -2,11 +2,16 @@ import os
 import pickle
 from os.path import dirname
 
+from classes.client.RedisClient import RedisClient
 from classes.entity.AccessTokenEntity import AccessTokenEntity
 
 
 class Config:
-    ACCESS_TOKEN_PATH = '/var/access_keys.pickle'
+    TOKEN_NAME = 'token'
+    redis_client: RedisClient
+
+    def __init__(self):
+        self.redis_client = RedisClient()
 
     def getApiOauthUrl(self) -> str:
         return 'https://hh.ru/'
@@ -33,14 +38,10 @@ class Config:
         return dirname(dirname(__file__))
 
     def getAccessToken(self) -> AccessTokenEntity:
-        with open(self.getAppPath() + self.ACCESS_TOKEN_PATH, 'rb') as file:
-            entity = pickle.load(file)
-
-        return entity
+        return pickle.loads(self.redis_client.db.get(self.TOKEN_NAME))
 
     def setAccessToken(self, entity: AccessTokenEntity) -> None:
-        with open(self.getAppPath() + self.ACCESS_TOKEN_PATH, 'wb') as file:
-            pickle.dump(entity, file)
+        self.redis_client.db.set(self.TOKEN_NAME, pickle.dumps(entity))
 
     def getAppEmail(self) -> str:
         return os.getenv('APP_EMAIL')
