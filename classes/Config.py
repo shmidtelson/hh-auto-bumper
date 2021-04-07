@@ -51,3 +51,9 @@ class Config:
             "Authorization": f"Bearer {self.getAccessToken().getAccessToken()}",
             "User Agent": f"Checker/1.0 ({self.getAppEmail()})"
         }
+
+    def get_resume_views_history(self, resume_id: str) -> str:
+        return self.getApiUrl() + f'resumes/{resume_id}/views'
+
+    def get_employer_by_id(self, employer_id: str) -> str:
+        return self.getApiUrl() + f'employers/{employer_id}'

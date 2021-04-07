@@ -5,6 +5,7 @@ from classes.services.ResumeService import ResumeService
 from classes.services.refresher.ResumeBumpHandler import ResumeBumpHandler
 from classes.services.refresher.ResumeCollectBlackListHandler import ResumeCollectBlackListHandler
 from classes.services.refresher.ResumeUpdateBlackListHandler import ResumeUpdateBlackListHandler
+from classes.services.refresher.resume_check_views_handler import ResumeCheckViewsHandler
 from classes.utils.logger import logger
 
 
@@ -36,6 +37,9 @@ class Refresher:
         # Resumes Bump and collect Data
         for resume in resumes:
             resumeBumpHandler = ResumeBumpHandler()
+            resumeCheckViewsHandler = ResumeCheckViewsHandler()
+            resumeCheckViewsHandler.handle(resume.getId())
+
             resumeCollectBlackListHandler = ResumeCollectBlackListHandler()
             # Setup our Chain
             resumeBumpHandler.set_next(resumeCollectBlackListHandler)
