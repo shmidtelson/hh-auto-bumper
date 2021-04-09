@@ -1,7 +1,7 @@
 from datetime import datetime
 import requests
-from classes.Config import Config
-from classes.utils.DateHelper import DateHelper
+from classes.config import Config
+from classes.utils.date_helper import DateHelper
 from classes.utils.logger import logger
 
 

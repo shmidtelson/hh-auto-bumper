@@ -1,6 +1,6 @@
 import requests
 import json
-from classes.Config import Config
+from classes.config import Config
 from classes.utils.logger import logger
 
 
@@ -10,20 +10,20 @@ class HeadHunterRepository:
     def __init__(self):
         self.config = Config()
 
-    def getResumes(self):
+    def get_resumes(self):
         try:
             response = requests.get(self.config.getMyResumesEndpoint(), headers=self.config.getAuthHeader())
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             return []
 
-        responseDict = json.loads(response.text)
+        response_dict = json.loads(response.text)
 
-        if 'items' not in responseDict:
-            logger.error(responseDict)
+        if 'items' not in response_dict:
+            logger.error(response_dict)
             return []
 
-        return responseDict['items']
+        return response_dict['items']
 
     def getBlackListCompaniesByResumeId(self, resumeId):
         try:

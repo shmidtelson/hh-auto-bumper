@@ -5,7 +5,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib import parse
 from dotenv import load_dotenv, find_dotenv
 from rauth import OAuth2Service
-from classes.Config import Config
+from classes.config import Config
 from classes.entity.AccessTokenEntity import AccessTokenEntity
 
 load_dotenv(find_dotenv())

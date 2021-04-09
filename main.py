@@ -1,7 +1,7 @@
 import time
+
 from dotenv import load_dotenv, find_dotenv
-from classes.Refresher import Refresher
-from classes.repository.HeadHunterRepository import HeadHunterRepository
+from classes.refresher import Refresher
 
 load_dotenv(find_dotenv())
 

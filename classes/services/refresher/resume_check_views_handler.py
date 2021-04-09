@@ -1,7 +1,7 @@
 from typing import List
 
-from classes.repository.HeadHunterRepository import HeadHunterRepository
-from classes.services.ResumeBlackListService import ResumeBlackListService
+from classes.repository.hh_repository import HeadHunterRepository
+from classes.services.resume_black_list_service import ResumeBlackListService
 
 
 class ResumeCheckViewsHandler:
@@ -22,7 +22,6 @@ class ResumeCheckViewsHandler:
 
     def __set_black_list(self, resume_id: str, ids: List):
         data = self.resume_black_list_service.getBlackListIdsByResumeId(resume_id)
-        print(ids)
         if ids:
             for i in ids:
                 if i not in data:

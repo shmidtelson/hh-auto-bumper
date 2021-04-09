@@ -1,7 +1,7 @@
 import pickle
 from typing import Set
 
-from classes.Config import Config
+from classes.config import Config
 
 
 class ResumeBlackListStorageService:

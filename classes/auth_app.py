@@ -3,7 +3,7 @@ import json
 from typing import Union
 from classes.entity.AccessTokenEntity import AccessTokenEntity
 from classes.utils.logger import logger
-from classes.Config import Config
+from classes.config import Config
 
 
 class AuthApp:

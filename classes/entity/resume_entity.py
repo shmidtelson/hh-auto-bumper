@@ -4,6 +4,7 @@ from __future__ import annotations
 class ResumeEntity:
     STATUS_PUBLISHED = 'published'
     ACCESS_TYPE_BLACKLIST = 'blacklist'
+    ACCESS_TYPE_NO_ONE = 'no_one'
 
     __id = None
     __updated = None

@@ -2,7 +2,7 @@ import os
 import pickle
 from os.path import dirname
 
-from classes.client.RedisClient import RedisClient
+from classes.client.redis_client import RedisClient
 from classes.entity.AccessTokenEntity import AccessTokenEntity
 
 

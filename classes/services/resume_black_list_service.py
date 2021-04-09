@@ -1,6 +1,6 @@
 from typing import Set
 
-from classes.repository.HeadHunterRepository import HeadHunterRepository
+from classes.repository.hh_repository import HeadHunterRepository
 
 
 class ResumeBlackListService:

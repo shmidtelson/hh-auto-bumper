@@ -1,10 +1,10 @@
-from classes.entity.ResumeEntity import ResumeEntity
-from classes.services.ResumeBlackListService import ResumeBlackListService
-from classes.services.ResumeBlackListStorageService import ResumeBlackListStorageService
-from classes.services.refresher.AbstractHandler import AbstractHandler
+from classes.entity.resume_entity import ResumeEntity
+from classes.services.resume_black_list_service import ResumeBlackListService
+from classes.services.resume_black_list_storage_service import ResumeBlackListStorageService
+from classes.services.refresher.abstract_handler import AbstractHandler
 
 
-class ResumeCollectBlackListHandler(AbstractHandler):
+class ResumeCollectBlackListHandler:
     resumeBlackListService = None
     resumeBlackListStorageService = None
 
@@ -12,13 +12,10 @@ class ResumeCollectBlackListHandler(AbstractHandler):
         self.resumeBlackListService = ResumeBlackListService()
         self.resumeBlackListStorageService = ResumeBlackListStorageService()
 
-    def handle(self, resume: ResumeEntity) -> str:
+    def handle(self, resume: ResumeEntity) -> None:
         if resume.getAccessType() == ResumeEntity.ACCESS_TYPE_BLACKLIST:
             data = self.resumeBlackListService.getBlackListIdsByResumeId(resume.getId())
             currentBlackList = self.resumeBlackListStorageService.get()
             currentBlackList = currentBlackList.union(data)
 
             self.resumeBlackListStorageService.set(currentBlackList)
-
-        # Blacklist
-        return super().handle(resume)
