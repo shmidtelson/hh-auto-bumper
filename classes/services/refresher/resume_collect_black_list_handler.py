@@ -1,7 +1,6 @@
 from classes.entity.resume_entity import ResumeEntity
 from classes.services.resume_black_list_service import ResumeBlackListService
 from classes.services.resume_black_list_storage_service import ResumeBlackListStorageService
-from classes.services.refresher.abstract_handler import AbstractHandler
 
 
 class ResumeCollectBlackListHandler:
