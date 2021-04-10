@@ -15,7 +15,8 @@ class ResumeCheckViewsHandler:
         for employer in employers.get('items'):
             employer_id = employer.get('employer').get('id')
             employer_data = self.repo.get_employer_by_id(employer_id)
-            if employer_data.get('type') == ResumeCheckViewsHandler.AGENCY_TYPE:
+
+            if employer_data and employer_data.get('type') == ResumeCheckViewsHandler.AGENCY_TYPE:
                 result.append(employer_id)
 
         self.__set_black_list(resume_id, result)
@@ -26,7 +27,5 @@ class ResumeCheckViewsHandler:
             for i in ids:
                 if i not in data:
                     data.add(i)
-                    print('added ')
-                    print(i)
             self.resume_black_list_service.setBlackListCompaniesByResumeId(resume_id, data)
 

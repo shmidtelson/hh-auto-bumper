@@ -20,28 +20,28 @@ class HeadHunterRepository:
         response_dict = json.loads(response.text)
 
         if 'items' not in response_dict:
+            logger.error(response_dict, exc_info=True)
+            return []
+
+        return response_dict['items']
+
+    def get_black_list_companies_by_resume_id(self, resumeId):
+        try:
+            response = requests.get(self.config.getResumeBlackListEndpoint(resumeId),
+                                    headers=self.config.getAuthHeader())
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            return []
+
+        response_dict = json.loads(response.text)
+
+        if 'items' not in response_dict:
             logger.error(response_dict)
             return []
 
         return response_dict['items']
 
-    def getBlackListCompaniesByResumeId(self, resumeId):
-        try:
-            response = requests.get(self.config.getResumeBlackListEndpoint(resumeId),
-                                    headers=self.config.getAuthHeader())
-        except Exception as e:
-            logger.error(e)
-            return []
-
-        responseDict = json.loads(response.text)
-
-        if 'items' not in responseDict:
-            logger.error(responseDict)
-            return []
-
-        return responseDict['items']
-
-    def setBlackListCompaniesByResumeId(self, resumeId, data: dict) -> bool:
+    def set_black_list_companies_by_resume_id(self, resumeId, data: dict) -> bool:
         try:
             requests.post(self.config.getResumeBlackListEndpoint(resumeId), json=data,
                           headers=self.config.getAuthHeader())
@@ -70,7 +70,7 @@ class HeadHunterRepository:
                                     )
 
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
             return []
 
         return response.json()
