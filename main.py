@@ -7,8 +7,9 @@ from classes.utils.logger import logger
 load_dotenv(find_dotenv())
 
 if __name__ == "__main__":
+    logger.info('Server was started')
+
     while True:
-        logger.info('Server was started')
         client = Refresher()
         client.execute()
         time.sleep(60*5)

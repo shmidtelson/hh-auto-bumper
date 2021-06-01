@@ -53,15 +53,17 @@ class HeadHunterRepository:
 
     def get_views_history_by_resume_id(self, resume_id: str):
         try:
-            response = requests.get(self.config.get_resume_views_history(resume_id),
-                                    headers=self.config.getAuthHeader()
-                                    )
+            response = requests.get(
+                self.config.get_resume_views_history(resume_id),
+                headers=self.config.getAuthHeader()
+            )
 
+            if response.ok:
+                return response.json()
         except Exception as e:
             logger.error(e)
-            return []
 
-        return response.json()
+        return []
 
     def get_employer_by_id(self, employer_id: str):
         try:
