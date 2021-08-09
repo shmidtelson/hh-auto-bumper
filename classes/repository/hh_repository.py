@@ -1,3 +1,5 @@
+import time
+
 import requests
 import json
 from classes.config import Config
@@ -52,18 +54,20 @@ class HeadHunterRepository:
         return True
 
     def get_views_history_by_resume_id(self, resume_id: str):
-        try:
-            response = requests.get(
-                self.config.get_resume_views_history(resume_id),
-                headers=self.config.getAuthHeader()
-            )
+        while True:
+            try:
+                response = requests.get(
+                    self.config.get_resume_views_history(resume_id),
+                    headers=self.config.getAuthHeader()
+                )
 
-            if response.ok:
-                return response.json()
-        except Exception as e:
-            logger.error(e)
+                if response.ok:
+                    return response.json()
 
-        return []
+            except Exception as e:
+                logger.error(e)
+
+            time.sleep(10)
 
     def get_employer_by_id(self, employer_id: str):
         try:
