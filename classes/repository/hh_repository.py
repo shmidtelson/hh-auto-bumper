@@ -70,13 +70,15 @@ class HeadHunterRepository:
             time.sleep(10)
 
     def get_employer_by_id(self, employer_id: str):
-        try:
-            response = requests.get(self.config.get_employer_by_id(employer_id),
-                                    headers=self.config.getAuthHeader()
-                                    )
+        while True:
+            try:
+                response = requests.get(self.config.get_employer_by_id(employer_id),
+                                        headers=self.config.getAuthHeader()
+                                        )
+                if response.ok:
+                    return response.json()
+            except Exception as e:
+                logger.error(e, exc_info=True)
+                return []
 
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            return []
-
-        return response.json()
+            time.sleep(10)
