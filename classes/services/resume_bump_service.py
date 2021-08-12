@@ -13,11 +13,12 @@ class ResumeBumpService:
         self.config = Config()
 
     def isReadyToBump(self, date: str) -> bool:
-        unixDate = int(datetime.strptime(date, '%Y-%m-%dT%H:%M:%S%z').timestamp())
-        return (DateHelper.getCurrentUnixDate() - unixDate) > self.RANGE_BUMP
+        unix_date = int(datetime.strptime(date, '%Y-%m-%dT%H:%M:%S%z').timestamp())
+        return (DateHelper.getCurrentUnixDate() - unix_date) > self.RANGE_BUMP
 
-    def bump(self, resumeId: str) -> None:
+    def bump(self, resume_id: str) -> None:
         try:
-            requests.post(f"{self.config.getApiUrl()}resumes/{resumeId}/publish", headers=self.config.getAuthHeader())
+            requests.post(f"{self.config.getApiUrl()}resumes/{resume_id}/publish", headers=self.config.getAuthHeader())
+            logger.info(f'Bumped resume: {resume_id}')
         except Exception as e:
             logger.error(e)
