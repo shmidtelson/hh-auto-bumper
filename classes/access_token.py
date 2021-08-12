@@ -21,7 +21,7 @@ class AccessToken:
             result = json.loads(response.text)
 
             if 'access_token' in result:
-                logger.debug('Refresh access_token')
+                logger.info('Refresh access_token')
                 self.config.setAccessToken(AccessTokenEntity(result))
         except Exception as e:
             logger.error(e)

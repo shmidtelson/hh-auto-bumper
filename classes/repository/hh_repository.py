@@ -25,7 +25,7 @@ class HeadHunterRepository:
             logger.error(response_dict, exc_info=True)
             return []
 
-        logger.debug('Got resumes')
+        logger.info('Got resumes')
 
         return response_dict['items']
 
@@ -43,7 +43,7 @@ class HeadHunterRepository:
             logger.error(response_dict)
             return []
 
-        logger.debug('Got black_list companies')
+        logger.info(f'Got black_list companies for resumeId: {resumeId}')
 
         return response_dict['items']
 
@@ -51,7 +51,7 @@ class HeadHunterRepository:
         try:
             requests.post(self.config.getResumeBlackListEndpoint(resumeId), json=data,
                           headers=self.config.getAuthHeader())
-            logger.debug('Updated black_list')
+            logger.info(f'Updated black_list for: {resumeId}')
         except Exception as e:
             logger.error(e)
             return False
@@ -67,7 +67,7 @@ class HeadHunterRepository:
                 )
 
                 if response.ok:
-                    logger.debug('Got views_history')
+                    logger.info(f'Got views_history for resume_id: {resume_id}')
                     return response.json()
 
             except Exception as e:
@@ -83,7 +83,7 @@ class HeadHunterRepository:
                     headers=self.config.getAuthHeader()
                 )
                 if response.ok:
-                    logger.debug(f'Got employer_id {employer_id}')
+                    logger.info(f'Got employer_id {employer_id}')
                     return response.json()
             except Exception as e:
                 logger.error(e, exc_info=True)
