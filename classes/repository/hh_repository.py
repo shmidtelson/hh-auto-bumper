@@ -25,6 +25,8 @@ class HeadHunterRepository:
             logger.error(response_dict, exc_info=True)
             return []
 
+        logger.debug('Got resumes')
+
         return response_dict['items']
 
     def get_black_list_companies_by_resume_id(self, resumeId):
@@ -41,12 +43,15 @@ class HeadHunterRepository:
             logger.error(response_dict)
             return []
 
+        logger.debug('Got black_list companies')
+
         return response_dict['items']
 
     def set_black_list_companies_by_resume_id(self, resumeId, data: dict) -> bool:
         try:
             requests.post(self.config.getResumeBlackListEndpoint(resumeId), json=data,
                           headers=self.config.getAuthHeader())
+            logger.debug('Updated black_list')
         except Exception as e:
             logger.error(e)
             return False
@@ -62,6 +67,7 @@ class HeadHunterRepository:
                 )
 
                 if response.ok:
+                    logger.debug('Got views_history')
                     return response.json()
 
             except Exception as e:
@@ -72,13 +78,14 @@ class HeadHunterRepository:
     def get_employer_by_id(self, employer_id: str):
         while True:
             try:
-                response = requests.get(self.config.get_employer_by_id(employer_id),
-                                        headers=self.config.getAuthHeader()
-                                        )
+                response = requests.get(
+                    self.config.get_employer_by_id(employer_id),
+                    headers=self.config.getAuthHeader()
+                )
                 if response.ok:
+                    logger.debug(f'Got employer_id {employer_id}')
                     return response.json()
             except Exception as e:
                 logger.error(e, exc_info=True)
-                return []
 
             time.sleep(10)
