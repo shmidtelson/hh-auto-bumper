@@ -12,4 +12,6 @@ if __name__ == "__main__":
     while True:
         client = Refresher()
         client.execute()
-        time.sleep(60*5)
+        logger.info('Wait next iteration')
+        time.sleep(15)
+        # time.sleep(60*5)

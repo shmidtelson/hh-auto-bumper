@@ -58,6 +58,9 @@ class HeadHunterRepository:
 
         return True
 
+    """
+    TODO: Return only unique list
+    """
     def get_views_history_by_resume_id(self, resume_id: str):
         while True:
             try:
@@ -78,13 +81,19 @@ class HeadHunterRepository:
     def get_employer_by_id(self, employer_id: str):
         while True:
             try:
+                logger.info(f'Try to get info about employer_id {employer_id}')
+                url = self.config.get_employer_by_id(employer_id)
                 response = requests.get(
                     self.config.get_employer_by_id(employer_id),
                     headers=self.config.getAuthHeader()
                 )
-                if response.ok:
+
+                if response.status_code == 200 and response.ok:
                     logger.info(f'Got employer_id {employer_id}')
                     return response.json()
+
+                logger.error(f'{employer_id} not found. This is weird! {response.status_code} ({url})')
+                return {}
             except Exception as e:
                 logger.error(e, exc_info=True)
 

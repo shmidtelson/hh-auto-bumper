@@ -11,13 +11,21 @@ class ResumeCheckViewsHandler:
 
     def handle(self, resume_id: str):
         result = []
+        got_employers_ids = []  # Control of duplicates
         employers = self.repo.get_views_history_by_resume_id(resume_id)
+
         for employer in employers.get('items'):
             employer_id = employer.get('employer').get('id')
+
+            if employer_id in got_employers_ids:
+                continue
+
             employer_data = self.repo.get_employer_by_id(employer_id)
 
             if employer_data and employer_data.get('type') == ResumeCheckViewsHandler.AGENCY_TYPE:
                 result.append(employer_id)
+
+            got_employers_ids.append(employer_id)
 
         self.__set_black_list(resume_id, result)
 
@@ -28,4 +36,3 @@ class ResumeCheckViewsHandler:
                 if i not in data:
                     data.add(i)
             self.resume_black_list_service.setBlackListCompaniesByResumeId(resume_id, data)
-
