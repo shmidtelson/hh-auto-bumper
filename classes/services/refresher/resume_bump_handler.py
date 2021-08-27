@@ -20,5 +20,5 @@ class ResumeBumpHandler:
         if not self.resumeBumpService.isReadyToBump(resume.get_updated()):
             return None
 
-        self.resumeBumpService.bump(resume.getId())
+        self.resumeBumpService.bump(resume.get_id())
         time.sleep(1)
