@@ -29,9 +29,9 @@ class HeadHunterRepository:
 
         return response_dict['items']
 
-    def get_black_list_companies_by_resume_id(self, resumeId):
+    def get_black_list_companies_by_resume_id(self, resume_id):
         try:
-            response = requests.get(self.config.getResumeBlackListEndpoint(resumeId),
+            response = requests.get(self.config.getResumeBlackListEndpoint(resume_id),
                                     headers=self.config.getAuthHeader())
         except Exception as e:
             logger.error(e, exc_info=True)
@@ -43,7 +43,7 @@ class HeadHunterRepository:
             logger.error(response_dict)
             return []
 
-        logger.info(f'Got black_list companies for resumeId: {resumeId}')
+        logger.info(f'Got black_list companies for resumeId: {resume_id}')
 
         return response_dict['items']
 

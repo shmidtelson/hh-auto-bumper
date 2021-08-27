@@ -38,7 +38,7 @@ class Refresher:
             logger.info('Access token expired. Try to get new')
             self.accessToken.handleRefreshToken(self.config.getAccessToken().getRefreshToken())
 
-        resumes = self.resumeService.getPublishedResumes()
+        resumes = self.resumeService.get_published_resumes()
 
         # Resumes read
         for resume in resumes:

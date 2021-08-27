@@ -10,7 +10,7 @@ class ResumeService:
     def __init__(self):
         self.repository = HeadHunterRepository()
 
-    def getResumes(self) -> List[ResumeEntity]:
+    def get_resumes(self) -> List[ResumeEntity]:
         result = []
         resumes = self.repository.get_resumes()
         for resume in resumes:
@@ -18,5 +18,5 @@ class ResumeService:
 
         return result
 
-    def getPublishedResumes(self) -> List[ResumeEntity]:
-        return list(filter(lambda resume: (resume.get_status() == resume.STATUS_PUBLISHED), self.getResumes()))
+    def get_published_resumes(self) -> List[ResumeEntity]:
+        return list(filter(lambda resume: (resume.get_status() == resume.STATUS_PUBLISHED), self.get_resumes()))
