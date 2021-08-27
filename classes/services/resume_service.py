@@ -17,3 +17,6 @@ class ResumeService:
             result.append(ResumeEntity.createFromResponse(resume))
 
         return result
+
+    def getPublishedResumes(self) -> List[ResumeEntity]:
+        return list(filter(lambda resume: (resume.get_status() == resume.STATUS_PUBLISHED), self.getResumes()))

@@ -12,9 +12,9 @@ class ResumeCollectBlackListHandler:
         self.resumeBlackListStorageService = ResumeBlackListStorageService()
 
     def handle(self, resume: ResumeEntity) -> None:
-        if resume.getAccessType() == ResumeEntity.ACCESS_TYPE_BLACKLIST:
-            data = self.resumeBlackListService.getBlackListIdsByResumeId(resume.getId())
-            currentBlackList = self.resumeBlackListStorageService.get()
-            currentBlackList = currentBlackList.union(data)
+        if resume.get_access_type() == ResumeEntity.ACCESS_TYPE_BLACKLIST:
+            data = self.resumeBlackListService.getBlackListIdsByResumeId(resume.get_id())
+            current_black_list = self.resumeBlackListStorageService.get()
+            current_black_list = current_black_list.union(data)
 
-            self.resumeBlackListStorageService.set(currentBlackList)
+            self.resumeBlackListStorageService.set(current_black_list)

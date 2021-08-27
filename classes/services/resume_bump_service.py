@@ -12,8 +12,8 @@ class ResumeBumpService:
     def __init__(self):
         self.config = Config()
 
-    def isReadyToBump(self, date: str) -> bool:
-        unix_date = int(datetime.strptime(date, '%Y-%m-%dT%H:%M:%S%z').timestamp())
+    def isReadyToBump(self, date: datetime) -> bool:
+        unix_date = int(date.timestamp())
         return (DateHelper.getCurrentUnixDate() - unix_date) > self.RANGE_BUMP
 
     def bump(self, resume_id: str) -> None:

@@ -11,10 +11,10 @@ class ResumeUpdateBlackListHandler:
         self.resumeBlackListStorageService = ResumeBlackListStorageService()
 
     def handle(self, resume: ResumeEntity) -> None:
-        if resume.getAccessType() == ResumeEntity.ACCESS_TYPE_BLACKLIST:
-            blackListSet = self.resumeBlackListStorageService.get()
-            data = self.resumeBlackListService.getBlackListIdsByResumeId(resume.getId())
+        if resume.get_access_type() == ResumeEntity.ACCESS_TYPE_BLACKLIST:
+            black_list_set = self.resumeBlackListStorageService.get()
+            data = self.resumeBlackListService.getBlackListIdsByResumeId(resume.get_id())
 
             # Add if exists new elements
-            if blackListSet.symmetric_difference(data):
-                self.resumeBlackListService.setBlackListCompaniesByResumeId(resume.getId(), blackListSet)
+            if black_list_set.symmetric_difference(data):
+                self.resumeBlackListService.setBlackListCompaniesByResumeId(resume.get_id(), black_list_set)

@@ -57,3 +57,6 @@ class Config:
 
     def get_employer_by_id(self, employer_id: str) -> str:
         return self.getApiUrl() + f'employers/{employer_id}'
+
+    def get_resume_id_endpoint(self, resume_id: str) -> str:
+        return f'{self.getApiUrl()}resumes/{resume_id}'

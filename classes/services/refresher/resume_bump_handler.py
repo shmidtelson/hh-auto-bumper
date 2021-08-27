@@ -11,13 +11,13 @@ class ResumeBumpHandler:
         self.resumeBumpService = ResumeBumpService()
 
     def handle(self, resume: ResumeEntity) -> None:
-        if resume.getStatus() != ResumeEntity.STATUS_PUBLISHED:
+        if resume.get_status() != ResumeEntity.STATUS_PUBLISHED:
             return None
 
-        if resume.getAccessType() == ResumeEntity.ACCESS_TYPE_NO_ONE:
+        if resume.get_access_type() == ResumeEntity.ACCESS_TYPE_NO_ONE:
             return None
 
-        if not self.resumeBumpService.isReadyToBump(resume.getUpdated()):
+        if not self.resumeBumpService.isReadyToBump(resume.get_updated()):
             return None
 
         self.resumeBumpService.bump(resume.getId())
