@@ -1,4 +1,4 @@
-DESCRIPTION = """My CV is here https://drive.google.com/file/d/1YyfjH9t7wWcaedJzsp_x3UoU2p4OFPsX/view
+DESCRIPTION = """Мое резюме здесь - https://drive.google.com/file/d/1YyfjH9t7wWcaedJzsp_x3UoU2p4OFPsX/view
 
 Изначально программирование было моим хобби, но этого показалось мало.
 Мой страстный интерес к программированию растет с каждым днем.

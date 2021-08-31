@@ -13,7 +13,7 @@ class ResumeUpdateDescriptionHandler:
         content = f"""{DESCRIPTION}
         
 Информация от бота, который управляет этим резюме:
-{self.get_date_latest_bot_work_message(resume.get_updated())}
+{self.get_date_latest_bot_work_message(datetime.now())}
 {self.get_similar_vacancies_message(resume.get_similar_vacancies_count())}
 {self.get_total_views_message(resume.get_total_views())}
 {self.get_blocked_companies_message(resume)}
