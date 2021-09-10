@@ -1,4 +1,4 @@
-DESCRIPTION = """Мое резюме здесь - https://drive.google.com/file/d/1YyfjH9t7wWcaedJzsp_x3UoU2p4OFPsX/view
+DESCRIPTION = """Мое резюме здесь - https://docs.google.com/document/d/1wCXsBR8uJpmFtAPFyxAWn9qnNUQUt0wZDXfX7WUhQOw/edit?usp=sharing
 
 Изначально программирование было моим хобби, но этого показалось мало.
 Мой страстный интерес к программированию растет с каждым днем.
