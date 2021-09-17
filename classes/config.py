@@ -60,3 +60,9 @@ class Config:
 
     def get_resume_id_endpoint(self, resume_id: str) -> str:
         return f'{self.getApiUrl()}resumes/{resume_id}'
+
+    def get_logstash_host(self) -> str:
+        return os.getenv('LOGSTASH_HOST')
+
+    def get_logstash_port(self) -> int:
+        return int(os.getenv('LOGSTASH_PORT'))

@@ -2,10 +2,12 @@ import time
 import locale
 
 from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+
 from classes.refresher import Refresher
 from classes.utils.logger import logger
 
-load_dotenv(find_dotenv())
+
 locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 
 if __name__ == "__main__":
