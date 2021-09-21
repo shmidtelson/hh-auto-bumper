@@ -1,7 +1,7 @@
 import logging
+import logging_loki
 import sys
-from logstash_async.handler import AsynchronousLogstashHandler
-from logstash_async.handler import LogstashFormatter
+
 
 from classes.config import Config
 config = Config()
@@ -17,17 +17,12 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 # LOGSTASH
-if config.get_logstash_host() and config.get_logstash_host():
-    logstash_handler = AsynchronousLogstashHandler(
-        host=config.get_logstash_host(),
-        port=config.get_logstash_port(),
-        ssl_enable=False,
-        ssl_verify=False,
-        database_path=''
+if config.get_loki_host() and config.get_loki_pass() and config.get_loki_user():
+    handler = logging_loki.LokiHandler(
+        url=config.get_loki_host(),
+        tags={"application": "hh.bumper"},
+        auth=(config.get_loki_user(), config.get_loki_pass()),
+        version="1",
     )
-    logstash_handler.setLevel(logging.ERROR)
-    formatter = LogstashFormatter()
-    logstash_handler.setFormatter(formatter)
-    logger.addHandler(logstash_handler)
 
-
+    logger.addHandler(handler)
