@@ -20,7 +20,7 @@ logger.addHandler(handler)
 if config.get_loki_host() and config.get_loki_pass() and config.get_loki_user():
     handler = logging_loki.LokiHandler(
         url=config.get_loki_host(),
-        tags={"application": "hh.bumper"},
+        tags={"job": "hh.bumper"},
         auth=(config.get_loki_user(), config.get_loki_pass()),
         version="1",
     )
