@@ -110,7 +110,7 @@ class HeadHunterRepository:
                     logger.info(f'Got employer_id {employer_id}')
                     return response.json()
 
-                logger.error(f'{employer_id} not found. This is weird! {response.status_code} ({url})')
+                logger.error(f'Employer {employer_id} not found. This is weird! {response.status_code} ({url})')
                 return {}
             except Exception as e:
                 logger.error(e, exc_info=True)

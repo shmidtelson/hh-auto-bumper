@@ -16,7 +16,7 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-# LOGSTASH
+# LOKI
 if config.get_loki_host() and config.get_loki_pass() and config.get_loki_user():
     handler = logging_loki.LokiHandler(
         url=config.get_loki_host(),
